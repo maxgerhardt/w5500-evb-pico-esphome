@@ -1,0 +1,66 @@
+---
+esphome:
+  name: w5500-hello
+  platformio_options:
+    upload_protocol: cmsis-dap
+    debug_tool: cmsis-dap
+
+rp2040:
+  board: wiznet_5500_evb_pico  # WIZnet W5500-EVB-Pico
+  
+  framework:
+    # Required until https://github.com/platformio/platform-raspberrypi/pull/36 is merged
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
+    version: 3.7.2
+    source: https://github.com/earlephilhower/arduino-pico.git#c670f66140e4188aab4a6f1a92644791a89cb153
+
+# shorthand
+external_components:
+  - source: eth_components
+
+w5500_ethernet:
+  # not supported in code, DHCP always used
+  # manual_ip:
+  #   static_ip: 192.168.0.123
+  #   gateway: 192.168.0.1
+  #   subnet: 255.255.255.0
+  #   dns1: 8.8.8.8
+
+# This entry enables that HomeAssisant can reach this device
+# Under the hostname w5500-hello.local
+api:
+
+# Example configuration entry
+switch:
+  - platform: gpio
+    pin: 3
+    name: "GPIO Pin 3"
+    id: example_gpio
+  # for this to work properly, the "output" and "interval" sections below
+  # MUST BE COMPLETELY COMMENTED OUT!!
+  - platform: gpio
+    pin: 25
+    name: "Onboard LED"
+    id: onboard_led
+
+
+logger:
+  level: DEBUG
+  # can say UART0 (for output on GP0) or USB_CDC here (USB port) for log messages
+  hardware_uart: UART0
+  #hardware_uart: USB_CDC
+
+# Debug blinking: Continously toggle the onboard LED to see that the firmware is running
+# output:
+#   - platform: gpio
+#     pin:
+#       number: 25
+#       mode: output
+#     id: LED
+
+# interval:
+#   - interval: 500ms
+#     then:
+#       - output.turn_on: LED
+#       - delay: 250ms
+#       - output.turn_off: LED
