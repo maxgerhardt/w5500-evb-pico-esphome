@@ -20,7 +20,7 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: Install custom ESPHome version
-        run: pip install "https://github.com/esphome/esphome/archive/refs/tags/2024.2.0b1.zip"
+        run: pip install "https://github.com/maxgerhardt/esphome/archive/refs/heads/dev.zip"
       - name: Make ESPHome generate PIO project
         run: esphome compile --only-generate w5500-hello.yml
       - name: Build PlatformIO Project
