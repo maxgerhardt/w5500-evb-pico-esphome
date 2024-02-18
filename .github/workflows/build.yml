@@ -1,0 +1,32 @@
+name: PlatformIO CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+      - name: Install custom ESPHome version
+        run: pip install "https://github.com/esphome/esphome/archive/refs/tags/2024.2.0b1.zip"
+      - name: Make ESPHome generate PIO project
+        run: esphome compile --only-generate w5500-hello.yml
+      - name: Build PlatformIO Project
+        run: pio run -d ".esphome/build/w5500-hello"
+      - name: Archive firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: w5500-esphome.uf2
+          path: .esphome/build/w5500-hello/.pio/build/w5500-hello/firmware.uf2

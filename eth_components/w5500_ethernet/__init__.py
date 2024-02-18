@@ -18,7 +18,9 @@ from esphome.components.network import IPAddress
 
 CONFLICTS_WITH = []
 DEPENDENCIES = ["rp2040"]
-AUTO_LOAD = ["network"]
+# This will only work with the modified network component from forked esphome.
+# uncomoment for now.
+#AUTO_LOAD = ["network"]
 
 ethernet_ns = cg.esphome_ns.namespace("w5500_ethernet")
 
