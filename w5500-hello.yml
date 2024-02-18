@@ -1,9 +1,10 @@
 ---
 esphome:
   name: w5500-hello
-  platformio_options:
-    upload_protocol: cmsis-dap
-    debug_tool: cmsis-dap
+  # Uncomment this if you want to upload via debug probe
+  # platformio_options:
+  #   upload_protocol: cmsis-dap
+  #   debug_tool: cmsis-dap
 
 rp2040:
   board: wiznet_5500_evb_pico  # WIZnet W5500-EVB-Pico
@@ -47,8 +48,8 @@ switch:
 logger:
   level: DEBUG
   # can say UART0 (for output on GP0) or USB_CDC here (USB port) for log messages
-  hardware_uart: UART0
-  #hardware_uart: USB_CDC
+  #hardware_uart: UART0
+  hardware_uart: USB_CDC
 
 # Debug blinking: Continously toggle the onboard LED to see that the firmware is running
 # output:
