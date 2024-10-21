@@ -10,8 +10,7 @@ rp2040:
   board: wiznet_5500_evb_pico  # WIZnet W5500-EVB-Pico
   
   framework:
-    # Required until https://github.com/platformio/platform-raspberrypi/pull/36 is merged
-    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git#v1.2.0-gcc12
     version: 3.7.2
     source: https://github.com/earlephilhower/arduino-pico.git#c670f66140e4188aab4a6f1a92644791a89cb153
 
